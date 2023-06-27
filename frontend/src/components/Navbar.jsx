@@ -1,12 +1,14 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Typography, Container } from "@mui/material";
 
 function Navbar() {
   return (
-    <AppBar sx={{ bgcolor: "text.primary", p: 0.7 }} position="static">
+    <AppBar sx={{ bgcolor: "#F0FFFF", py: 1 }} position="static">
       <Toolbar variant="regular">
-        <Typography variant="h5" component="h1">
-          Journal
-        </Typography>
+        <Container fixed>
+          <Typography variant="h4" component="h1" sx={{color: "text.primary"}}>
+            Journal
+          </Typography>
+        </Container>
       </Toolbar>
     </AppBar>
   );
