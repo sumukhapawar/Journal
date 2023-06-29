@@ -1,5 +1,6 @@
-import { Paper, Typography, Button } from "@mui/material";
+import { Paper, Typography, Button, ButtonGroup } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import PropTypes from "prop-types";
 
 const Post = ({ title, content, removeTask, id }) => {
@@ -13,9 +14,18 @@ const Post = ({ title, content, removeTask, id }) => {
         {title}
       </Typography>
       <Typography gutterBottom>{content}</Typography>
-      <Button onClick={() => removeTask(id)} variant="outlined" color="error" startIcon={<DeleteIcon />}>
-        Delete
-      </Button>
+      <ButtonGroup variant="text" aria-label="text button group">
+        <Button color="success" startIcon={<EditIcon />}>
+          Edit
+        </Button>
+        <Button
+          onClick={() => removeTask(id)}
+          color="error"
+          startIcon={<DeleteIcon />}
+        >
+          Delete
+        </Button>
+      </ButtonGroup>
     </Paper>
   );
 };
@@ -25,6 +35,7 @@ Post.propTypes = {
   content: PropTypes.string.isRequired,
   removeTask: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
-}
+  editPost: PropTypes.func.isRequired,
+};
 
 export default Post;

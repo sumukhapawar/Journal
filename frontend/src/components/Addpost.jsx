@@ -1,8 +1,16 @@
-import { TextField, Button, Paper, Stack } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Paper,
+  Stack,
+  Backdrop,
+  CircularProgress,
+} from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
-const Addpost = () => {
+const Addpost = ({ loading, setLoading }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -14,10 +22,12 @@ const Addpost = () => {
       content: content,
     };
 
+    setLoading(true);
     axios
       .post("http://localhost:3000/add", post)
       .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
 
     setTitle("");
     setContent("");
@@ -30,7 +40,15 @@ const Addpost = () => {
       component="form"
       onSubmit={handleSubmit}
       elevation={5}
-      sx={{ p: 2, bgcolor: "#F5F5F5" }}
+      sx={{
+        p: 2,
+        bgcolor: "#F5F5F5",
+        position: "sticky",
+        top: "100px",
+        zIndex: 10,
+        boxShadow: 3,
+        m: "16px",
+      }}
     >
       <Stack spacing={2}>
         <TextField
@@ -58,8 +76,19 @@ const Addpost = () => {
           Add Post
         </Button>
       </Stack>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Paper>
   );
+};
+
+Addpost.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  setLoading: PropTypes.func.isRequired,
 };
 
 export default Addpost;
