@@ -1,8 +1,9 @@
 import { AppBar, Toolbar, Typography, Container } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <AppBar sx={{ bgcolor: "#F0FFFF", py: 1 }} position="sticky">
+    <AppBar sx={{ bgcolor: "#F0FFFF" }} position="sticky">
       <Toolbar variant="regular">
         <Container fixed>
           <Typography
@@ -10,7 +11,9 @@ function Navbar() {
             component="h1"
             sx={{ color: "text.primary" }}
           >
-            Journal
+            <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+              Journal
+            </Link>
           </Typography>
         </Container>
       </Toolbar>

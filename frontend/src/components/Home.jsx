@@ -39,6 +39,12 @@ const Home = () => {
     setPosts(posts.filter((post) => post._id !== id));
   };
 
+  const postsList = () => {
+    return posts.map((post) => {
+      return <Post key={post._id} post={post} removeTask={deletePost} />;
+    });
+  };
+
   return (
     <Container fixed sx={{ my: 2 }}>
       <Grid container spacing={5}>
@@ -46,15 +52,7 @@ const Home = () => {
           <Typography component="h2" variant="h4">
             Posts
           </Typography>
-          {posts.map((post) => (
-            <Post
-              key={post._id}
-              id={post._id}
-              title={post.title}
-              content={post.content}
-              removeTask={deletePost}
-            />
-          ))}
+          {postsList()}
         </Grid>
         <Grid item xs={12} lg={4}>
           <Addpost loading={loading} setLoading={setLoading} />

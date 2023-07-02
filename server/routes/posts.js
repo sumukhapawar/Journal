@@ -30,7 +30,7 @@ router.delete("/:id", (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.put("/:id", (req, res) => {
+router.put("/edit/:id", (req, res) => {
   console.log(req.body);
   Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(() => res.json("Post updated"))

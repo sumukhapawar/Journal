@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
+import EditPost from "./components/EditPost";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/edit/:id" element={<EditPost />} />
       </Routes>
     </div>
   );

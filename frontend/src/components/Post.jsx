@@ -1,9 +1,10 @@
 import { Paper, Typography, Button, ButtonGroup } from "@mui/material";
+import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import PropTypes from "prop-types";
 
-const Post = ({ title, content, removeTask, id }) => {
+const Post = ({ post, removeTask }) => {
   return (
     <Paper
       component="div"
@@ -11,15 +12,17 @@ const Post = ({ title, content, removeTask, id }) => {
       sx={{ bgcolor: "#f5f5f5", p: 2, my: 4 }}
     >
       <Typography component="h3" variant="h5" gutterBottom>
-        {title}
+        {post.title}
       </Typography>
-      <Typography gutterBottom>{content}</Typography>
+      <Typography gutterBottom>{post.content}</Typography>
       <ButtonGroup variant="text" aria-label="text button group">
-        <Button color="success" startIcon={<EditIcon />}>
-          Edit
-        </Button>
+        <Link to={"/edit/" + post._id}>
+          <Button color="success" startIcon={<EditIcon />}>
+            Edit
+          </Button>
+        </Link>
         <Button
-          onClick={() => removeTask(id)}
+          onClick={() => removeTask(post._id)}
           color="error"
           startIcon={<DeleteIcon />}
         >
@@ -31,11 +34,12 @@ const Post = ({ title, content, removeTask, id }) => {
 };
 
 Post.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  post: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+  }),
   removeTask: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  editPost: PropTypes.func.isRequired,
 };
 
 export default Post;
